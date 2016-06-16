@@ -87,10 +87,3 @@ ENV/
 
 # Rope project settings
 .ropeproject
-
-##########################################
-# begin IntelliJ/IDEs/Text editors stuff #
-##########################################
-.idea
-
-# end IntelliJ/IDEs/Text editors
