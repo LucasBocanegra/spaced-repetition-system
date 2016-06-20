@@ -3,7 +3,6 @@ from django.utils import timezone
 
 
 class Deck(models.Model):
-    # id = models.AutoField(primary_key=True)
     owner = models.ForeignKey('auth.User')
     title = models.CharField(max_length=200)
     description = models.CharField(max_length=500)
@@ -15,11 +14,10 @@ class Deck(models.Model):
 
 
 class Card(models.Model):
-    # id = models.AutoField(primary_key=True)
     phrase = models.CharField(max_length=800)
     translation = models.CharField(max_length=800)
     level = models.IntegerField(default=0)
-    view_data = models.DateTimeField(default=timezone.now)
+    view_date = models.DateTimeField(default=timezone.now)
     deck = models.ForeignKey('Deck', on_delete=models.CASCADE)
 
     def __str__(self):
