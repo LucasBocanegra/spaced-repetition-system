@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <!--Import Google Icon Font-->
+    <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <!--Import materialize.css-->
+
+    <!-- Compiled and minified CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.6/css/materialize.min.css">
+
+    <!-- Compiled and minified JavaScript -->
+    <!--Let browser know website is optimized for mobile-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+</head>
+
+<body>
+<div class="container">
+    <div class="row">
+        {% for deck in decks %}
+        <div class="col s12 m3 l3">
+            <div class="card hoverable">
+                <div class="card-image waves-effect waves-block waves-light">
+                    <img class="activator" src="http://materializecss.com/images/office.jpg">
+                </div>
+                <div class="card-content">
+                    <span class="card-title activator grey-text text-darken-4">{{deck.title}}<i class="dropdown-button material-icons right" data-activates="dropdown1{{deck.title}}">more_vert</i></span>
+                    <ul id="dropdown1{{deck.title}}" class="dropdown-content">
+                        <li><a href="#!">editar</a></li>
+                        <li class="divider"></li>
+                        <li><a href="#!">excluir</a></li>
+                    </ul>
+
+                    <p><a href="#!">{{ deck.created_date }}</a></p>
+                </div>
+                <div class="card-action">
+                    <div class="row">
+                        <div class="col s6 m6 l6">
+                            <a href="#">Adicionar cards</a>
+                        </div>
+                        <div class="col s6 m6 l6">
+                            <a href="#">Iniciar revisão </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        {% endfor %}
+    </div>
+
+    <div class="fixed-action-btn" style="bottom: 45px; right: 24px;">
+        <a class="btn-floating btn-large red">
+            <i class="large material-icons">add</i>
+        </a>
+    </div>
+</div>
+
+<!--Import jQuery before materialize.js-->
+<script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.6/js/materialize.min.js"></script>
+<script>
+    $(document).ready(function () {
+        $(".dropdown-button").dropdown();
+
+    });
+</script>
+
+</body>
+</html>
+
