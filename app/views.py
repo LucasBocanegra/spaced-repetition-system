@@ -25,7 +25,7 @@ def deck_new(request):
             return my_decks(request)
     else:
         form = DeckForm()
-    return render(request, 'app/deck_new.html', {'form': form})
+    return render(request, 'app/deck_new.html', {'form': form, })
 
 
 def deck_edit(request, pk):

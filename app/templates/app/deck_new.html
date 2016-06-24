@@ -1,16 +1,50 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <!--Import Google Icon Font-->
+    <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <!--Import materialize.css-->
+
+    <!-- Compiled and minified CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.6/css/materialize.min.css">
+
+    <!-- Compiled and minified JavaScript -->
+    <!--Let browser know website is optimized for mobile-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Novo Deck</title>
 </head>
 <body>
-{% block content %}
-    <h1>New deck</h1>
+<div class="container">
+    {% block content %}
+    <div class="row">
+        <div class="col s12 m12 l12">
+                <h1>Novo deck</h1>
+        </div>
+    </div>
     <form method="POST" class="deck-form">{% csrf_token %}
-        {{ form.as_p }}
+        <div class="row">
+            <div class="input-field  col s12 m12 l12">
+                <input type="text" id="deckTitle" name="title"><label for="deckTitle">Nome</label>
+            </div>
+        </div>
+        <div class="row">
+            <div class="input-field  col s12 m12 l12">
+                <input type="text" id="deckDescription" name="description"><label for="deckDescription">Descrição</label>
+            </div>
+        </div>
+        <div class="row">
+            <div class="input-field  col s6 m4 l4">
+                <input min="1" type="number" id="deckLimitViewCards" name="limit_view_cards"><label for="deckLimitViewCards">Número de cards no deck</label>
+            </div>
+        </div>
+        <!--{{ form.as_p }}-->
         <button type="submit" class="save btn btn-default">Guardar</button>
     </form>
 {% endblock %}
+</div>
+
+<script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.6/js/materialize.min.js"></script>
 </body>
 </html>
