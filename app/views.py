@@ -46,3 +46,18 @@ def deck_edit(request, pk):
 def deck_detail(request, pk):
     deck = get_object_or_404(Deck, pk=pk)
     return render(request, 'app/deck_detail.html', {'deck': deck})
+
+def deck_delete(request, pk):
+    deck = get_object_or_404(Deck, pk=pk)
+    if request.method == "POST":
+        form = DeckForm(request.POST, instance=deck)
+        # if form.is_valid():
+        #     deck = form.save(commit=False)
+        #     deck.owner = request.user
+        #     deck.created_date = timezone.now()
+        #     deck.save()
+        #     return deck_detail(request, deck.pk)
+    else:
+        deck.delete()
+        decks = Deck.objects.all()
+        return render(request, 'app/my_decks.html', {'decks': decks})

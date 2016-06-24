@@ -27,7 +27,7 @@
                     <ul id="dropdown{{deck.pk}}" class="dropdown-content">
                         <li><a href="{% url 'deck_edit' pk=deck.pk %}">editar</a></li>
                         <li class="divider"></li>
-                        <li><a href="#!">excluir</a></li>
+                        <li><a href="{% url 'deck_delete' pk=deck.pk %}">excluir</a></li>
                     </ul>
 
                     <p><a href="#!">{{ deck.created_date }}</a></p>
