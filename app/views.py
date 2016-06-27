@@ -2,12 +2,30 @@ from django.shortcuts import render
 from django.utils import timezone
 from .models import Deck, Card
 from .forms import DeckForm
+from .forms import UserForm
 from django.shortcuts import get_object_or_404
+from django.contrib.auth.models import User
+
+def index(request):
+    return render(request, 'app/index.html', {})
 
 
 def my_decks(request):
     decks = Deck.objects.all()
     return render(request, 'app/my_decks.html', {'decks': decks})
+
+
+def user_new(request):
+    if request.method == "POST":
+        form = UserForm(request.POST)
+        if form.is_valid():
+            user = form.save(commit=False)
+            user.active()
+            user.save()
+            return my_decks(request)
+    else:
+        form = UserForm()
+    return render(request, 'app/user_new.html', {'form': form,})
 
 
 def deck_new(request):
