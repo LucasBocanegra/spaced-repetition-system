@@ -10,6 +10,7 @@ urlpatterns = [
     url(r'^deck/(?P<pk>[0-9]+)/addCard/$', views.deck_add_card, name='deck_add_card'),
     url(r'^deck/(?P<pk>[0-9]+)/detail/$', views.deck_detail, name='deck_detail'),
     url(r'^deck/(?P<pk>[0-9]+)/delete/$', views.deck_delete, name='deck_delete'),
-    url(r'^cards/init/(?P<pk>[0-9]+)$', views.init_review, name='init_review'),
+    url(r'^deck/(?P<pk>[0-9]+)/cards/init$', views.init_review, name='init_review'),
+    url(r'^card/update/(?P<pk>[0-9]+)$', views.card_update, name='card_update'),
 
 ]

@@ -21,6 +21,6 @@ class Card(models.Model):
     deck = models.ForeignKey('Deck', on_delete=models.CASCADE)
 
     def __str__(self):
-        return self.phrase
+        return self.phrase + " last view date: " + self.view_date.strftime("%H:%M:%S %d/%m/%y")
 
 

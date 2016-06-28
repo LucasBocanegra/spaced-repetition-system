@@ -38,7 +38,8 @@
                             <a href="{% url 'deck_add_card' pk=deck.pk %}">Adicionar cards</a>
                         </div>
                         <div class="col s6 m6 l6">
-                            <a href="{% url 'init_review' pk=deck.pk %}">Iniciar revisão </a>
+{#                            <a href="{% url 'init_review' pk=deck.pk  %}">Iniciar revisão </a>#}
+                            <a href="{% url 'init_review' pk=deck.pk %}?step=1">Iniciar revisão </a>
                         </div>
                     </div>
                 </div>

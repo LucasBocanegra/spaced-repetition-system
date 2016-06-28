@@ -1,6 +1,49 @@
 {% extends 'app/base.html' %}
 
 {% block content %}
-    <h1>Teste init Deck</h1>
-    {{ cards }}
+    <h1 >{{ deck.title }}</h1>
+    <div class="divider"></div>
+
+    <ul class="collapsible" data-collapsible="accordion">
+        <li>
+          <div class="collapsible-header active">
+              <i class="material-icons">text_format</i>
+              Frase
+              <span class="right">{{ step }}/{{ listSize }}</span>
+          </div>
+          <div class="collapsible-body text-center">
+              <h2>{{ card.phrase }}</h2>
+
+              <div class="translate">
+                  <h2>{{ card.translation }}</h2>
+              </div>
+          </div>
+        </li>
+    </ul>
+    <div class="row">
+        <div class="col s12 m12">
+            <a class="waves-effect waves-light btn-large orange darken-2 right" id="view">
+                <i class="material-icons left">translate</i>
+                Traduzir
+            </a>
+        </div>
+    </div>
+
+    <div id="answer" class="row">
+        <div class="col s12 center text-center">
+            <h4>Você acertou?</h4>
+            <a  href="{% url 'card_update' pk=card.pk %}?step={{ request.GET.step }}&answer=hit"
+                class="waves-effect waves-light btn-large orange darken-2">
+                <i class="fa fa-smile-o left" aria-hidden="true"></i>
+                Acertei
+            </a>
+            <a href="{% url 'card_update' pk=card.pk %}?step={{ request.GET.step }}&answer=error"
+                class="waves-effect waves-light btn-large deep-orange darken-3">
+                <i class="fa fa-frown-o left" aria-hidden="true"></i>
+                Errei
+            </a>
+        </div>
+    </div>
+
+
 {% endblock content %}

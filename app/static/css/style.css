@@ -1,5 +1,10 @@
-@media only screen and (min-width: 601px){
-    .content {
-        width: 992px;
-    }
+.text-center{
+    text-align: center;
+}
+.text-right{
+    text-align: right;
+}
+
+.translate{
+    color: #f57c00;
 }

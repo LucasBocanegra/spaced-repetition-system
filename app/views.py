@@ -1,5 +1,7 @@
-from django.shortcuts import render
+from django.db.models.expressions import Date
+from django.shortcuts import render, redirect
 from django.utils import timezone
+from datetime import datetime
 from .models import Deck, Card
 from .forms import DeckForm
 from .forms import CardForm
@@ -91,7 +93,7 @@ def deck_delete(request, pk):
         #     deck = form.save(commit=False)
         #     deck.owner = request.user
         #     deck.created_date = timezone.now()
-        #     deck.save()mtnecks
+        #     deck.save()
         #     return deck_detail(request, deck.pk)
     else:
         deck.delete()
@@ -100,8 +102,37 @@ def deck_delete(request, pk):
 
 
 def init_review(request, pk):
-    if request.user.is_authenticated():
-        cards = Card.objects.filter(deck=pk)
+    # if request.user.is_authenticated():
+    #     cards = Card.objects.filter(deck=pk)
 
-        return render(request, 'app/init_review.html', {'cards': cards})
+    deck = get_object_or_404(Deck, pk=pk)
+    current_step = int(request.GET['step'])
+    limit = int(deck.limit_view_cards)
+    if current_step <= deck.limit_view_cards:
+        cards = Card.objects.filter(deck=pk).order_by('view_date')
+        print(cards)
 
+        if cards.count() < limit:
+            if current_step > cards.count():
+                return redirect(my_decks)
+
+        return render(request, 'app/init_review.html',
+                      {'card': cards[0], 'deck': deck, 'step': current_step,
+                       'listSize': deck.limit_view_cards if cards.count() > limit else cards.count})
+    else:
+        return redirect(my_decks)
+
+
+def card_update(request, pk):
+    answer = request.GET['answer']
+    new_step = int(request.GET['step'])+1
+    cards = Card.objects.filter(pk=pk)
+
+    if answer == 'hit':
+        print('updated date\n')
+        print(timezone.get_current_timezone_name())
+        print(timezone.get_current_timezone())
+        print(timezone.now())
+        cards.update(view_date=timezone.localtime(timezone.now()))
+
+    return redirect('/deck/'+str(cards[0].deck_id)+'/cards/init?step='+str(new_step))
