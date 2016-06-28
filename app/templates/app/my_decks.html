@@ -20,7 +20,7 @@
         <div class="col s12 m3 l3">
             <div class="card hoverable">
                 <div class="card-image waves-effect waves-block waves-light">
-                    <img class="activator" src="http://materializecss.com/images/office.jpg">
+                   <a href="{% url 'deck_detail' pk=deck.pk %}"><img class="activator" src="http://materializecss.com/images/office.jpg"></a>
                 </div>
                 <div class="card-content">
                     <span class="card-title activator grey-text text-darken-4 truncate">{{deck.title}}<i class="dropdown-button material-icons right" data-activates="dropdown{{deck.pk}}">more_vert</i></span>
@@ -29,7 +29,6 @@
                         <li class="divider"></li>
                         <li><a href="{% url 'deck_delete' pk=deck.pk %}">excluir</a></li>
                     </ul>
-
                     <p><a href="#!">{{ deck.created_date }}</a></p>
                 </div>
                 <div class="card-action">
