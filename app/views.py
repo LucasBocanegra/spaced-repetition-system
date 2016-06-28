@@ -1,7 +1,7 @@
 from django.db.models.expressions import Date
 from django.shortcuts import render, redirect
 from django.utils import timezone
-from datetime import datetime
+from datetime import datetime,timedelta
 from .models import Deck, Card
 from .forms import DeckForm
 from .forms import CardForm
@@ -110,6 +110,11 @@ def init_review(request, pk):
     limit = int(deck.limit_view_cards)
     if current_step <= deck.limit_view_cards:
         cards = Card.objects.filter(deck=pk).order_by('view_date')
+
+        print('updated date\n')
+        print(timezone.get_current_timezone_name())
+        print(timezone.get_current_timezone())
+        print(timezone.now())
         print(cards)
 
         if cards.count() < limit:
@@ -129,10 +134,8 @@ def card_update(request, pk):
     cards = Card.objects.filter(pk=pk)
 
     if answer == 'hit':
-        print('updated date\n')
-        print(timezone.get_current_timezone_name())
-        print(timezone.get_current_timezone())
-        print(timezone.now())
         cards.update(view_date=timezone.localtime(timezone.now()))
+    else:
+        cards.update(view_date=timezone.localtime(timezone.now()-timedelta(minutes=10)))
 
     return redirect('/deck/'+str(cards[0].deck_id)+'/cards/init?step='+str(new_step))
