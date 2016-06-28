@@ -78,7 +78,9 @@ def deck_edit(request, pk):
 
 def deck_detail(request, pk):
     deck = get_object_or_404(Deck, pk=pk)
-    return render(request, 'app/deck_detail.html', {'deck': deck})
+    cards = Card.objects.filter(deck=pk)
+
+    return render(request, 'app/deck_detail.html', {'cards': cards, 'deck': deck})
 
 
 def deck_delete(request, pk):
