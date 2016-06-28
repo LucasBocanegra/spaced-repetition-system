@@ -12,5 +12,9 @@ urlpatterns = [
     url(r'^deck/(?P<pk>[0-9]+)/delete/$', views.deck_delete, name='deck_delete'),
     url(r'^deck/(?P<pk>[0-9]+)/cards/init$', views.init_review, name='init_review'),
     url(r'^card/update/(?P<pk>[0-9]+)$', views.card_update, name='card_update'),
+    url(r'^card/(?P<pk>[0-9]+)$', views.card_edit, name='card_edit'),
+    url(r'^card/(?P<pk>[0-9]+)/delete/$', views.card_delete, name='card_delete'),
+
+
 
 ]

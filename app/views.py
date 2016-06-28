@@ -58,10 +58,11 @@ def deck_add_card(request, pk):
             card.deck = deck
             card.view_date = timezone.now()
             card.save()
-            return deck_detail(request, deck.pk)
+            return redirect(deck_detail, pk=deck.pk)
     else:
         form = CardForm()
     return render(request, 'app/card_new.html', {'form': form})
+
 
 def deck_edit(request, pk):
     deck = get_object_or_404(Deck, pk=pk)
@@ -78,6 +79,22 @@ def deck_edit(request, pk):
     return render(request, 'app/deck_edit.html', {'form': form})
 
 
+def card_edit(request, pk):
+    card = get_object_or_404(Card, pk=pk)
+    # deck = get_object_or_404(Deck, pk=pk2)
+
+    if request.method == "POST":
+        form = CardForm(request.POST, instance=card)
+        if form.is_valid():
+            card = form.save(commit=False)
+            card.view_date = timezone.now()
+            card.save()
+            return redirect(deck_detail, pk=card.deck.pk)
+    else:
+        form = CardForm(instance=card)
+    return render(request, 'app/card_edit.html', {'form': form})
+
+
 def deck_detail(request, pk):
     deck = get_object_or_404(Deck, pk=pk)
     cards = Card.objects.filter(deck=pk)
@@ -89,16 +106,10 @@ def deck_delete(request, pk):
     deck = get_object_or_404(Deck, pk=pk)
     if request.method == "POST":
         form = DeckForm(request.POST, instance=deck)
-        # if form.is_valid():
-        #     deck = form.save(commit=False)
-        #     deck.owner = request.user
-        #     deck.created_date = timezone.now()
-        #     deck.save()
-        #     return deck_detail(request, deck.pk)
+
     else:
         deck.delete()
-        decks = Deck.objects.all()
-        return render(request, 'app/my_decks.html', {'decks': decks})
+        return redirect(my_decks)
 
 
 def init_review(request, pk):
@@ -139,3 +150,14 @@ def card_update(request, pk):
         cards.update(view_date=timezone.localtime(timezone.now()-timedelta(minutes=10)))
 
     return redirect('/deck/'+str(cards[0].deck_id)+'/cards/init?step='+str(new_step))
+
+
+def card_delete(request, pk):
+    card = get_object_or_404(Card, pk=pk)
+    if request.method == "POST":
+        form = CardForm(request.POST, instance=card)
+    else:
+        deck = get_object_or_404(Deck, pk=card.deck.pk)
+        card.delete()
+        cards = Card.objects.filter(deck=deck)
+        return redirect(deck_detail, pk=deck.pk)

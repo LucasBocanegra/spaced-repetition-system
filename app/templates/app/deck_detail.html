@@ -16,10 +16,10 @@
                 <div class="card-action">
                     <div class="row">
                         <div class="col s6 m6 l6">
-                            <a href="{% url 'deck_add_card' pk=deck.pk %}">Editar card</a>
+                            <a href="{% url 'card_edit' pk=card.pk %}">Editar card</a>
                         </div>
                         <div class="col s6 m6 l6">
-                            <a href="{% url 'init_review' pk=deck.pk %}">Excluir card  </a>
+                            <a href="{% url 'card_delete' pk=card.pk %}">Excluir card  </a>
                         </div>
                     </div>
                 </div>

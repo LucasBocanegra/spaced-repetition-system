@@ -1,0 +1,10 @@
+{% extends 'app/base.html' %}
+
+{% block content %}
+    <h1>Editar Card</h1>
+    <form method="POST" class="card-form">{% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="save btn btn-default">Salvar</button>
+    </form>
+{% endblock content %}
+
