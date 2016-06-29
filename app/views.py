@@ -61,7 +61,7 @@ def deck_add_card(request, pk):
             return redirect(deck_detail, pk=deck.pk)
     else:
         form = CardForm()
-    return render(request, 'app/card_new.html', {'form': form})
+    return render(request, 'app/card_new.html', {'form': form, 'deck':deck})
 
 
 def deck_edit(request, pk):
@@ -76,7 +76,7 @@ def deck_edit(request, pk):
             return deck_detail(request,deck.pk)
     else:
         form = DeckForm(instance=deck)
-    return render(request, 'app/deck_edit.html', {'form': form})
+    return render(request, 'app/deck_edit.html', {'form': form, 'deck':deck})
 
 
 def card_edit(request, pk):
@@ -92,7 +92,7 @@ def card_edit(request, pk):
             return redirect(deck_detail, pk=card.deck.pk)
     else:
         form = CardForm(instance=card)
-    return render(request, 'app/card_edit.html', {'form': form})
+    return render(request, 'app/card_edit.html', {'form': form, 'deck': card.deck})
 
 
 def deck_detail(request, pk):
@@ -106,7 +106,6 @@ def deck_delete(request, pk):
     deck = get_object_or_404(Deck, pk=pk)
     if request.method == "POST":
         form = DeckForm(request.POST, instance=deck)
-
     else:
         deck.delete()
         return redirect(my_decks)

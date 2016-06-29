@@ -1,6 +1,14 @@
 {% extends 'app/base.html' %}
 {% load staticfiles %}
 {% block content %}
+ <nav>
+    <div class="nav-wrapper">
+      <div class="col s12">
+        <a href="{% url 'my_decks' %}" class="breadcrumb">Meus decks</a>
+          <a href="{% url 'deck_detail' pk=deck.pk %}" class="breadcrumb">{{deck.title}}</a>
+      </div>
+    </div>
+  </nav>
     <h1>{{deck.title}}k</h1>
     <div class="row">
         {% for card in cards %}

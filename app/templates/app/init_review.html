@@ -1,6 +1,15 @@
 {% extends 'app/base.html' %}
 
 {% block content %}
+<nav>
+    <div class="nav-wrapper">
+      <div class="col s12">
+        <a href="{% url 'my_decks' %}" class="breadcrumb">Meus decks</a>
+          <a href="{% url 'deck_detail' pk=deck.pk %}" class="breadcrumb">{{deck.title}}</a>
+          <a href="{% url 'init_review' pk=deck.pk %}?step=1" class="breadcrumb">Revisão</a>
+      </div>
+    </div>
+  </nav>
     <h1 >{{ deck.title }}</h1>
     <div class="divider"></div>
 

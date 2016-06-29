@@ -1,6 +1,16 @@
 {% extends 'app/base.html' %}
 
 {% block content %}
+<nav>
+    <div class="nav-wrapper">
+      <div class="col s12">
+        <a href="{% url 'my_decks' %}" class="breadcrumb">Meus decks</a>
+          <a href="{% url 'deck_detail' pk=deck.pk %}" class="breadcrumb">{{deck.title}}</a>
+          <a href="#" class="breadcrumb">Criar novo Card</a>
+
+      </div>
+    </div>
+  </nav>
     <h1>Criar novo Card</h1>
     <form method="POST" class="card-form">{% csrf_token %}
         {{ form.as_p }}
