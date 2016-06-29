@@ -1,5 +1,5 @@
 {% extends 'app/base.html' %}
-
+{% load staticfiles %}
 {% block content %}
     <h1>{{deck.title}}k</h1>
     <div class="row">
@@ -7,7 +7,7 @@
         <div class="col s12 m3 l3">
             <div class="card hoverable">
                 <div class="card-image waves-effect waves-block waves-light">
-                    <img class="activator" src="http://materializecss.com/images/office.jpg">
+                    <img class="activator" src="{% static 'images/card-image.jpg' %}">
                 </div>
                 <div class="card-content">
                     <span class="card-title activator grey-text text-darken-4 truncate">{{card.phrase}}</span>
@@ -28,9 +28,19 @@
         </div>
         {% endfor %}
     <div class="fixed-action-btn" style="bottom: 45px; right: 24px;">
-        <a href="{% url 'deck_add_card' pk=deck.pk %}"class="btn-floating btn-large red">
-            <i class="large material-icons">add</i>
-        </a>
-    </div>
+    <a class="btn-floating btn-large red">
+      <i class="large material-icons">menu</i>
+    </a>
+    <ul>
+      <li><a href="{% url 'deck_add_card' pk=deck.pk %}" class="btn-floating red tooltipped" data-tooltip="Novo card"><i class="material-icons">add</i></a></li>
+      <li><a href="{% url 'deck_edit' pk=deck.pk %}" class="btn-floating yellow darken-1 tooltipped" data-tooltip="Editar Deck"><i class="material-icons">mode_edit</i></a></li>
+      <li><a href="{% url 'init_review' pk=deck.pk %}?step=1" class="btn-floating green tooltipped" data-tooltip="Iniciar revisão"><i class="material-icons">play_circle_outline</i></a></li>
+    </ul>
+  </div>
 </div>
 {% endblock content %}
+<script>
+    $(document).ready(function(){
+        $('.tooltipped').tooltip({delay: 50});
+  });
+</script>
