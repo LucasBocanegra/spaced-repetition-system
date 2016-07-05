@@ -7,7 +7,7 @@ class Deck(models.Model):
     title = models.CharField(max_length=200)
     description = models.CharField(max_length=500)
     created_date = models.DateTimeField(default=timezone.now)
-    limit_view_cards = models.IntegerField(default=10)
+    limit_view_cards = models.IntegerField(default=0)
 
     def __str__(self):
         return self.title
@@ -18,6 +18,8 @@ class Card(models.Model):
     translation = models.CharField(max_length=800)
     level = models.IntegerField(default=0)
     view_date = models.DateTimeField(default=timezone.now)
+    review_date = models.DateTimeField(default=timezone.now)
+
     deck = models.ForeignKey('Deck', on_delete=models.CASCADE)
 
     def __str__(self):

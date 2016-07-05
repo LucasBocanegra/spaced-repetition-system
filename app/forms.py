@@ -9,7 +9,7 @@ class DeckForm(forms.ModelForm):
 
     class Meta:
         model = Deck
-        fields = ('title', 'description','limit_view_cards',)
+        fields = ('title', 'description',)
 
 
 class CardForm(forms.ModelForm):

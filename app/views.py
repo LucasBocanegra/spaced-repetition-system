@@ -75,6 +75,8 @@ def deck_add_card(request, pk):
             card.deck = deck
             card.view_date = timezone.now()
             card.save()
+            deck.limit_view_cards += 1
+            deck.save()
             return redirect(deck_detail, pk=deck.pk)
     else:
         form = CardForm()
@@ -146,13 +148,21 @@ def init_review(request, pk):
 
         if cards.count() < limit:
             if current_step > cards.count():
-                return redirect(my_decks)
+                update_view_date_of_deck(request, pk)
 
         return render(request, 'app/init_review.html',
-                      {'card': cards[0], 'deck': deck, 'step': current_step,
+                      {'card': cards[current_step-1], 'deck': deck, 'step': current_step,
                        'listSize': deck.limit_view_cards if cards.count() > limit else cards.count})
     else:
-        return redirect(my_decks)
+        return update_view_date_of_deck(request, pk)
+
+
+def update_view_date_of_deck(request, pk):
+    cards = Card.objects.filter(deck=pk)
+    for c in cards:
+        c.view_date = c.review_date
+        c.save()
+    return redirect(my_decks)
 
 
 def card_update(request, pk):
@@ -161,9 +171,7 @@ def card_update(request, pk):
     cards = Card.objects.filter(pk=pk)
 
     if answer == 'hit':
-        cards.update(view_date=timezone.localtime(timezone.now()))
-    else:
-        cards.update(view_date=timezone.localtime(timezone.now()-timedelta(minutes=10)))
+        cards.update(review_date=timezone.localtime(timezone.now()))
 
     return redirect('/deck/'+str(cards[0].deck_id)+'/cards/init?step='+str(new_step))
 
@@ -175,5 +183,7 @@ def card_delete(request, pk):
     else:
         deck = get_object_or_404(Deck, pk=card.deck.pk)
         card.delete()
+        deck.limit_view_cards -= 1
+        deck.save()
         cards = Card.objects.filter(deck=deck)
         return redirect(deck_detail, pk=deck.pk)

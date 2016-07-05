@@ -17,22 +17,126 @@
 <body>
 <nav>
     <div class="nav-wrapper navbar-fixed">
-      <a href="#!" class="brand-logo truncated">SRE</a>
-      <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a>
-      <ul class="right hide-on-med-and-down">
-        <li><a href="#">História</a></li>
-        <li><a href="#">O que é</a></li>
-        <li><a href="#">Como funciona</a></li>
-        <li><a href="{% url 'user_login' %}">Login</a></li>
-      </ul>
-      <ul class="side-nav" id="mobile-demo">
-        <li><a href="#">História</a></li>
-        <li><a href="#">O que é</a></li>
-        <li><a href="#">Como funciona</a></li>
-        <li><a href="{% url 'user_login' %}">Login</a></li>
-      </ul>
+        <a href="#!" class="brand-logo truncated">SRE</a>
+        <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a>
+        <ul class="right hide-on-med-and-down">
+            <li><a href="#">História</a></li>
+            <li><a href="#">O que é</a></li>
+            <li><a href="#">Como funciona</a></li>
+            <li><a href="{% url 'user_login' %}">Login</a></li>
+        </ul>
+        <ul class="side-nav" id="mobile-demo">
+            <li><a href="#">História</a></li>
+            <li><a href="#">O que é</a></li>
+            <li><a href="#">Como funciona</a></li>
+            <li><a href="{% url 'user_login' %}">Login</a></li>
+        </ul>
     </div>
-  </nav>
+</nav>
+
+<div class="row">
+    <div class="col s12 m12 l12">
+        <h3>REPETIÇÃO ESPAÇADA</h3>
+        <p class="justify">As primeiras 24 horas após a aquisição do
+            conhecimento é o período em que ocorre maior
+            parte do esquecimento. A técnica de Repetição
+            Espaçada afirma que neste período a revisão inicial,
+            que compreende 10 minutos para cada hora/aula, é
+            suficiente para reter na memória do estudante toda
+            a informação aprendida. Uma semana depois (dia 7),
+            para cada hora de aula expositiva serão necessárias
+            apenas 5 minutos para “reativar” o mesmo conteúdo,
+            elevando a curva de aprendizagem para 100% mais
+            uma vez. Ao final de 30 dias, precisará de apenas 2-4
+            minutos para obter novamente os 100% da curva
+            de aprendizagem.</p>
+        <p class="justify">
+            É evidente que a técnica de Repetição
+            Espaçada cita, basicamente, apenas que há um
+            momento ideal para as revisões, ela não considera
+            as questões individuais de aprendizagem e nem
+            as características de estudo de cada indivíduo,
+            mas serve como parâmetro para
+            que seja sempre lembrado um
+            determinado assunto no momento
+            em que o estudante está mais
+            suscetível em esquecê-lo.
+        </p>
+        <p>
+            Estudos que datam desde o
+            século XIX e que foram aprimorados
+            no século XX, promovidos por
+            filósofos, psicólogos e matemáticos
+            como Ebbinghaus e Wozniak
+            (WOZNIAK, 1992) foram amplamente
+            aplicados ao poder computacional
+            para promover a capacidade
+            humana de memorização. Hoje,
+            temos poderosas ferramentas
+            computacionais de apoio para
+            este desenvolvimento, não apenas
+            nos computadores pessoais, mas
+            também em smartphones como, por exemplo, aplicativos e métodos de utilização
+            de flashcards, os quais são descritos
+            a seguir.
+        </p>
+    </div>
+</div>
+<div class="row">
+    <div class="col s12 m12 l12">
+        <h3>FLASHCARDS</h3>
+        <p>
+            Flashcards são pedaços de
+            papel (geralmente cartolina) utilizados
+            como ferramenta para o aprendizado.
+            Em cada cartão escreve-se alguma
+            informação que deseja-se aprender.
+            Geralmente, de um lado do cartão
+            escreve-se o conteúdo e no verso do
+            cartão a resposta.
+        </p>
+        <p>Flashcards de papel são utilizados desde o
+            século XIX. Creditado como o primeiro da história
+            temos um conjunto de cartões fonéticos chamados
+            Reading Disentangled  em 1834, criado pelo inglês
+            educador Favell Lee (PRUZAN, 2006).
+            Na década de 1970, o jornalista científico
+            alemão Sebastian Leitner produziu o sistema
+            Leitner para agendamento de flashcards, mais
+            especificamente em 1972 com a sua obra “So lernt
+            man lernen. Der Weg zum Erfolg” (Então você
+            começa a aprender. A estrada para o sucesso).
+        </p>
+        <p>O sistema Leitner funciona da seguinte maneira:
+            cada cartão contém uma pergunta de um lado e
+            no verso a resposta. Ao ler a pergunta, o estudante
+            verifica se sabe a resposta. Caso afirmativo, o cartão
+            é movido para o bloco de cartões já estudados.
+            Caso o estudante desconheça a resposta, o
+            cartão é movido para o bloco de cartões a serem
+            revistos posteriormente.
+        </p>
+    </div>
+</div>
+<div class="row">
+    <div class="col s12 m12 l12">
+        <h3>Como funciona</h3>
+        <p>Os flashcards promovem o fenômeno da
+reminiscência. Este fenômeno foi descrito pela
+primeira vez na literatura científica pelo psicólogo
+inglês Ballard (PERGHER; STEIN, 2003), o qual
+descobriu, através de experimentos, que a fixação do
+conteúdo é maior algum tempo depois do estudante
+adquirir o conhecimento do que imediatamente
+após a sua aquisição. Segundo Eisenkraemer
+(EISENKRAEMER, 2013) a reminiscência
+consiste em lembrar-se de informações
+que anteriormente não eram recordadas
+e considera a reminiscência como um
+subproduto natural da repetição dos estudos
+realizada pelo estudante.</p>
+    </div>
+</div>
 
 <!--Import jQuery before materialize.js-->
 <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
@@ -41,7 +145,7 @@
     $(document).ready(function(){
         $('.scrollspy').scrollSpy();
         $(".button-collapse").sideNav();
-  });
+    });
 </script>
 </body>
 </html>
