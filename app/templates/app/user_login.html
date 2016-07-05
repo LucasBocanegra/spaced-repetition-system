@@ -1,0 +1,44 @@
+{% extends 'app/base.html' %}
+
+{% block content %}
+
+<div class="row">
+    <div class="card white col s12 m6 l4 offset-m3 offset-l4 offset-vertical-2" style="margin-top: 30px;">
+        <div class="card-content" style="padding: 20px !important;">
+            <div class="card-image" style="padding-bottom: 20px;">
+            </div> <!-- card-image -->
+            <form method="POST" class="card-form">{% csrf_token %}
+                <div class="row">
+                    <div class="row no-margin-bottom">
+                        <div class="input-field col s12">
+                            <i class="material-icons prefix">account_circle</i>
+                            <input id="username" name="username" type="text">
+                            <label for="username">Usuário</label>
+                        </div> <!-- input-field -->
+                    </div>
+                    <div class="row no-margin-bottom">
+                        <div class="input-field col s12">
+                            <i class="material-icons prefix">lock</i>
+                            <input id="password" name="password" type="password">
+                            <label for="password">Senha</label>
+                        </div> <!-- input-field -->
+                    </div>
+                    <div class="row no-margin-bottom">
+                        <div class="input-field center col s12">
+                            <button type="submit" class="btn waves-effect waves-light my-orange">Entrar</button>
+                        </div>
+                    </div>
+                    <div class="row no-margin-bottom">
+                        <div class="input-field col s6 m6 l6">
+                            <a class="margin" mapping="resetPassword">Esqueceu sua senha?</a> <br>
+                        </div>
+                        <div class="input-field col s6 m6 l6 right-align">
+                            <a mapping="signup">Cadastre-se</a>
+                        </div>
+                    </div> <!-- input field -->
+                </div> <!-- row -->
+            </form>
+        </div> <!-- card-content -->
+    </div> <!-- card -->
+</div> <!-- row -->
+{% endblock content %}

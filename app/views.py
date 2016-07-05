@@ -6,6 +6,7 @@ from .models import Deck, Card
 from .forms import DeckForm
 from .forms import CardForm
 from .forms import UserForm
+from .forms import UserFormLogin
 from django.shortcuts import get_object_or_404
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login
@@ -22,12 +23,27 @@ def my_decks(request):
         return render(request, 'app/my_decks.html', {'decks': decks})
 
 
+def user_login(request):
+    if request.method == "POST":
+        username = request.POST['username']
+        password = request.POST['password']
+        user = authenticate(username=username, password=password)
+        if user is not None:
+            if user.is_active:
+                login(request, user)
+                return my_decks(request)
+    else:
+        return render(request, 'app/user_login.html')
+
+
 def user_new(request):
     if request.method == "POST":
         form = UserForm(request.POST)
         if form.is_valid():
             user = form.save(commit=False)
             user.is_active = True
+            user.is_staff = True
+            user.set_password(form.cleaned_data['password'])
             user.save()
             return my_decks(request)
     else:

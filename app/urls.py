@@ -4,6 +4,7 @@ from . import  views
 urlpatterns = [
     url(r'^$', views.index),
     url(r'^mydecks/', views.my_decks, name='my_decks'),
+    url(r'^user/login/$', views.user_login, name='user_login'),
     url(r'^deck/new/$', views.deck_new, name='deck_new'),
     url(r'^user/new/$', views.user_new, name='user_new'),
     url(r'^deck/(?P<pk>[0-9]+)/edit/$', views.deck_edit, name='deck_edit'),
