@@ -12,7 +12,6 @@ from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login
 
 
-
 def index(request):
     return render(request, 'app/index.html', {})
 
@@ -31,7 +30,7 @@ def user_login(request):
         if user is not None:
             if user.is_active:
                 login(request, user)
-                return my_decks(request)
+                return redirect(my_decks)
     else:
         return render(request, 'app/user_login.html')
 
@@ -45,10 +44,10 @@ def user_new(request):
             user.is_staff = True
             user.set_password(form.cleaned_data['password'])
             user.save()
-            return my_decks(request)
+            return redirect(user_login)
     else:
         form = UserForm()
-    return render(request, 'app/user_new.html', {'form': form,})
+    return render(request, 'app/user_new.html', {'form': form, })
 
 
 def deck_new(request):
