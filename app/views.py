@@ -31,6 +31,8 @@ def user_login(request):
             if user.is_active:
                 login(request, user)
                 return redirect(my_decks)
+        else:
+            return redirect(user_login)
     else:
         return render(request, 'app/user_login.html')
 
